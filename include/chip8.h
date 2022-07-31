@@ -3,9 +3,10 @@
 
 #include "config.h"
 
-struct chip8
-{
-    
+#include "chip8memory.h"
+struct chip8 {
+    struct chip8_memory memory;
+
 };
 
 #endif

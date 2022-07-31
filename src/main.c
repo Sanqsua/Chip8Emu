@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include "SDL2/SDL.h"
 #include "chip8.h"
+#include "chip8memory.h"
 int main(int argc, char ** argv)
 {
 
+    struct chip8 chip8;
+    chip8_memory_set(&chip8.memory,0x400,'z' );
+    printf("%c\n", chip8_memory_get(&chip8.memory,0x400));
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window* window = SDL_CreateWindow(
         CONFIG_EMULATOR_WINDOW_TITLE,
