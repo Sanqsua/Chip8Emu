@@ -2,12 +2,21 @@
 #include "SDL2/SDL.h"
 #include "chip8.h"
 #include "chip8memory.h"
+
+#include "chip8stack.h"
 int main(int argc, char ** argv)
 {
 
     struct chip8 chip8;
-    chip8_memory_set(&chip8.chip8memory,0x400,'z' );
-    printf("%c\n", chip8_memory_get(&chip8.chip8memory,0x400));
+    chip8.chip8registers.SP = 0;
+    chip8_stack_push(&chip8,0xff);
+    printf("Stackpointer index: %d\n",chip8.chip8registers.SP);
+    printf("Stackpointer: %d\n",chip8.chip8stack.stack[chip8.chip8registers.SP-1]);
+
+    unsigned char popvalue = chip8_stack_pop(&chip8);
+    printf("Stackpointer index: %d\n", chip8.chip8registers.SP);
+    printf("Stackpointer value: %d\n", popvalue);
+ 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window* window = SDL_CreateWindow(
         CONFIG_EMULATOR_WINDOW_TITLE,
